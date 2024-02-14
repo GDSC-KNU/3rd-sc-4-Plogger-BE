@@ -1,9 +1,11 @@
 package com.gdsc.plogger.trashCan;
 
 import com.gdsc.plogger.trashCan.data.Trashcan;
+import com.gdsc.plogger.trashCan.data.dto.req.AddTrashcanReq;
 import com.gdsc.plogger.trashCan.data.dto.res.TrashcanGetRes;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,5 +28,13 @@ public class TrashcanController {
     @PatchMapping("/{id}")
     public ResponseEntity<List<TrashcanGetRes>> report(@PathVariable(name = "id") Long id) {
         return trashcanService.report(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<TrashcanGetRes> addNewTrashcan(AddTrashcanReq request) {
+        Trashcan trashcan = trashcanService.addNewTrashcan(request);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new TrashcanGetRes(trashcan));
     }
 }
