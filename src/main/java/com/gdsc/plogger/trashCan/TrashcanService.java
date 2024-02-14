@@ -26,4 +26,13 @@ public class TrashcanService {
         return ResponseEntity.ok()
                 .body(res);
     }
+
+    public ResponseEntity<List<TrashcanGetRes>> report(Long id) {
+        Trashcan trashcan = trashcanRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+
+        trashcan.report();
+
+        return findNoReport();
+    }
 }

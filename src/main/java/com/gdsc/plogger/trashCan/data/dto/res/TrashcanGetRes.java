@@ -5,10 +5,12 @@ import lombok.Data;
 
 @Data
 public class TrashcanGetRes {
+    private long id;
     private double latitude;
     private double longitude;
 
     public TrashcanGetRes(Trashcan trashcan) {
+        this.id = trashcan.getId();
         this.latitude = trashcan.getLatitude();
         this.longitude = trashcan.getLongitude();
     }

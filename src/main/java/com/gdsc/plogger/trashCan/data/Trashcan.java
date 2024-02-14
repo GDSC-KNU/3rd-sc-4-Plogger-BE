@@ -31,4 +31,8 @@ public class Trashcan {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    public void report() {
+        this.report += 1;
+    }
 }
