@@ -1,4 +1,4 @@
-package com.gdsc.plogger.trashCan.data;
+package com.gdsc.plogger.trashcan.data;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

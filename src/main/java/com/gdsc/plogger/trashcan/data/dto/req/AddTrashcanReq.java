@@ -1,6 +1,6 @@
-package com.gdsc.plogger.trashCan.data.dto.req;
+package com.gdsc.plogger.trashcan.data.dto.req;
 
-import com.gdsc.plogger.trashCan.data.Trashcan;
+import com.gdsc.plogger.trashcan.data.Trashcan;
 
 public class AddTrashcanReq {
     private double latitude;

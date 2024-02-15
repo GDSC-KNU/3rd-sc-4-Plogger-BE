@@ -1,8 +1,8 @@
-package com.gdsc.plogger.trashCan;
+package com.gdsc.plogger.trashcan;
 
-import com.gdsc.plogger.trashCan.data.Trashcan;
-import com.gdsc.plogger.trashCan.data.dto.req.AddTrashcanReq;
-import com.gdsc.plogger.trashCan.data.dto.res.TrashcanGetRes;
+import com.gdsc.plogger.trashcan.data.Trashcan;
+import com.gdsc.plogger.trashcan.data.dto.req.AddTrashcanReq;
+import com.gdsc.plogger.trashcan.data.dto.res.TrashcanGetRes;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

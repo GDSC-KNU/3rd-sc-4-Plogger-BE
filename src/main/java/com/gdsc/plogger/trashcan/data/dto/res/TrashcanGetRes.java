@@ -1,6 +1,6 @@
-package com.gdsc.plogger.trashCan.data.dto.res;
+package com.gdsc.plogger.trashcan.data.dto.res;
 
-import com.gdsc.plogger.trashCan.data.Trashcan;
+import com.gdsc.plogger.trashcan.data.Trashcan;
 import lombok.Data;
 
 @Data

@@ -1,6 +1,6 @@
-package com.gdsc.plogger.trashCan;
+package com.gdsc.plogger.trashcan;
 
-import com.gdsc.plogger.trashCan.data.Trashcan;
+import com.gdsc.plogger.trashcan.data.Trashcan;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
