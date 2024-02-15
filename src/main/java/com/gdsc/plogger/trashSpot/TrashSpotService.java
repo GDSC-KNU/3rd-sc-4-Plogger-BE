@@ -17,8 +17,8 @@ public class TrashSpotService {
     @Autowired
     TrashSpotRepository trashSpotRepository;
 
-    public ResponseEntity<List<TrashSpotGetRes>> getAllSpots() {
-        List<TrashSpot> trashSpots = trashSpotRepository.findAll();
+    public ResponseEntity<List<TrashSpotGetRes>> getSpots() {
+        List<TrashSpot> trashSpots = trashSpotRepository.findByReportLessThan(1);
         List<TrashSpotGetRes> res = new ArrayList<>();
 
         for(TrashSpot trashSpot : trashSpots) {

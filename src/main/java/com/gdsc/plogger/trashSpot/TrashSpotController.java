@@ -18,8 +18,8 @@ public class TrashSpotController {
     private final TrashSpotService trashSpotService;
 
     @GetMapping
-    public ResponseEntity<List<TrashSpotGetRes>> getAllSpots() {
-        return trashSpotService.getAllSpots();
+    public ResponseEntity<List<TrashSpotGetRes>> getSpots() {
+        return trashSpotService.getSpots();
     }
 
     @PostMapping
