@@ -6,6 +6,7 @@ import com.gdsc.plogger.member.data.dto.res.MemberGetRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,15 +15,18 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public ResponseEntity<MemberGetRes> getMember(Long id) {
+    public ResponseEntity<MemberGetRes> getMember(Authentication authentication) {
+        Long id = (Long) authentication.getPrincipal();
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다."));
 
         return new ResponseEntity<>(new MemberGetRes(member), HttpStatus.OK);
     }
 
-    public ResponseEntity<MemberGetRes> patchMember(MemberPatchReq patchReq, Long id) {
+    public ResponseEntity<MemberGetRes> patchMember(MemberPatchReq patchReq, Authentication authentication) {
         if (patchReq == null) throw new IllegalArgumentException("MemberPatchReq가 null입니다.");
+
+        Long id = (Long) authentication.getPrincipal();
 
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다."));
