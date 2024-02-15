@@ -3,6 +3,7 @@ package com.gdsc.plogger.trashCan;
 import com.gdsc.plogger.trashCan.data.Trashcan;
 import com.gdsc.plogger.trashCan.data.dto.req.AddTrashcanReq;
 import com.gdsc.plogger.trashCan.data.dto.res.TrashcanGetRes;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class TrashcanService {
                 .body(res);
     }
 
+    @Transactional
     public ResponseEntity<List<TrashcanGetRes>> report(Long id) {
         Trashcan trashcan = trashcanRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
