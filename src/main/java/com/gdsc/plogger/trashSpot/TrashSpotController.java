@@ -5,6 +5,7 @@ import com.gdsc.plogger.trashSpot.data.dto.res.TrashSpotGetRes;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,5 +33,10 @@ public class TrashSpotController {
     @PatchMapping("/{id}")
     public ResponseEntity<List<TrashSpotGetRes>> reportSpot(@PathVariable(name = "id") Long id) {
         return trashSpotService.reportSpot(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSpot(@PathVariable(name = "id") Long id) {
+        return trashSpotService.deleteSpot(id);
     }
 }
