@@ -6,6 +6,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +27,10 @@ public class TrashSpotController {
     @PostMapping
     public ResponseEntity<TrashSpotGetRes> addNewSpot(@RequestBody AddTrashSpotReq req) {
         return trashSpotService.addNewSpot(req);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<List<TrashSpotGetRes>> reportSpot(@PathVariable(name = "id") Long id) {
+        return trashSpotService.reportSpot(id);
     }
 }

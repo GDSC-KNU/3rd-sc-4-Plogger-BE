@@ -3,6 +3,7 @@ package com.gdsc.plogger.trashSpot;
 import com.gdsc.plogger.trashSpot.data.TrashSpot;
 import com.gdsc.plogger.trashSpot.data.dto.req.AddTrashSpotReq;
 import com.gdsc.plogger.trashSpot.data.dto.res.TrashSpotGetRes;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +34,15 @@ public class TrashSpotService {
         TrashSpot newSpot = trashSpotRepository.save(req.toEntity());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new TrashSpotGetRes(newSpot));
+    }
+
+    @Transactional
+    public ResponseEntity<List<TrashSpotGetRes>> reportSpot(Long id) {
+        TrashSpot spot = trashSpotRepository.findById(id)
+                        .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+
+        spot.report();
+
+        return getSpots();
     }
 }
