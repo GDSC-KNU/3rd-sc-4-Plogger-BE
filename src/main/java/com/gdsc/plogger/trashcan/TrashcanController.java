@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ public class TrashcanController {
 
     @GetMapping
     public ResponseEntity<List<TrashcanGetRes>> getTrashcans() {
-        return trashcanService.findNoReport();
+        return trashcanService.getTrashcans();
     }
 
     @PatchMapping("/{id}")
@@ -36,5 +37,10 @@ public class TrashcanController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new TrashcanGetRes(trashcan));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id) {
+        return trashcanService.deleteTrashcan(id);
     }
 }

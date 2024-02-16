@@ -16,9 +16,10 @@ import org.springframework.stereotype.Service;
 public class TrashcanService {
     @Autowired
     private final TrashcanRepository trashcanRepository;
+    private final int threshold = 1;
 
-    public ResponseEntity<List<TrashcanGetRes>> findNoReport() {
-        List<Trashcan> trashcans = trashcanRepository.findByReportLessThan(1);
+    public ResponseEntity<List<TrashcanGetRes>> getTrashcans() {
+        List<Trashcan> trashcans = trashcanRepository.findAll();
         List<TrashcanGetRes> res = new ArrayList<>();
 
         for(Trashcan trashcan : trashcans) {
@@ -36,10 +37,20 @@ public class TrashcanService {
 
         trashcan.report();
 
-        return findNoReport();
+        if(trashcan.getReport() >= threshold) {
+            deleteTrashcan(id);
+        }
+
+        return getTrashcans();
     }
 
     public Trashcan addNewTrashcan(AddTrashcanReq request) {
         return trashcanRepository.save(request.toEntity());
+    }
+
+    public ResponseEntity<Void> deleteTrashcan(Long id) {
+        trashcanRepository.deleteById(id);
+
+        return ResponseEntity.ok().build();
     }
 }
