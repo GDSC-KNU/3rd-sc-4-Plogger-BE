@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class TrashcanGetRes {
-    private long id;
+    private Long id;
     private double latitude;
     private double longitude;
 
