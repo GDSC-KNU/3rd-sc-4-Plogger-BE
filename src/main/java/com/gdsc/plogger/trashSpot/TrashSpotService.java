@@ -17,9 +17,10 @@ import org.springframework.stereotype.Service;
 public class TrashSpotService {
     @Autowired
     TrashSpotRepository trashSpotRepository;
+    private final int MAX_REPORT = 1;
 
     public ResponseEntity<List<TrashSpotGetRes>> getSpots() {
-        List<TrashSpot> trashSpots = trashSpotRepository.findByReportLessThan(1);
+        List<TrashSpot> trashSpots = trashSpotRepository.findAll();
         List<TrashSpotGetRes> res = new ArrayList<>();
 
         for(TrashSpot trashSpot : trashSpots) {
@@ -43,6 +44,16 @@ public class TrashSpotService {
 
         spot.report();
 
+        if(spot.getReport() >= MAX_REPORT) {
+            deleteSpot(id);
+        }
+
         return getSpots();
+    }
+
+    public ResponseEntity<Void> deleteSpot(Long id) {
+        trashSpotRepository.deleteById(id);
+
+        return ResponseEntity.ok().build();
     }
 }
