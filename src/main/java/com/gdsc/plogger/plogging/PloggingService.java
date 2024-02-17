@@ -42,6 +42,17 @@ public class PloggingService {
         return ResponseEntity.status(HttpStatus.CREATED).body(new PloggingGetRes(newPlogging));
     }
 
+    public void deletePlogging(Long id) {
+        Plogging plogging = ploggingRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("해당 일지가 존재하지 않습니다"));
+
+        if(!plogging.getMember().equals(getMember())) {
+            throw new IllegalArgumentException("not authorized");
+        }
+
+        ploggingRepository.delete(plogging);
+    }
+
     private Member getMember() {
         Long memberId = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
         Member member = memberRepository.findById(memberId)
