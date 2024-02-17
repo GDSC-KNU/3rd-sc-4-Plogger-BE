@@ -15,12 +15,12 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping
-    public ResponseEntity<MemberGetRes> getMember(Authentication authentication) {
-        return memberService.getMember(authentication);
+    public ResponseEntity<MemberGetRes> getMember() {
+        return memberService.getMember();
     }
 
     @PatchMapping
-    public ResponseEntity<MemberGetRes> patchMember(@RequestBody MemberPatchReq patchReq, Authentication authentication) {
-        return memberService.patchMember(patchReq, authentication);
+    public ResponseEntity<MemberGetRes> patchMember(@RequestBody MemberPatchReq patchReq) {
+        return memberService.patchMember(patchReq);
     }
 }
