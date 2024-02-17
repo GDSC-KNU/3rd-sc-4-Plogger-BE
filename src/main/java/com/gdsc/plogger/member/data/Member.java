@@ -2,8 +2,11 @@ package com.gdsc.plogger.member.data;
 
 import com.gdsc.plogger.common.BaseEntity;
 import com.gdsc.plogger.member.data.dto.req.MemberPatchReq;
+import com.gdsc.plogger.plogging.data.Plogging;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +32,9 @@ public class Member extends BaseEntity {
     private String refreshToken;
 
     private String profileImage;
+
+    @OneToMany(mappedBy = "member")
+    List<Plogging> ploggings = new ArrayList<>();
 
     @Builder
     public Member(String nickname, String email, String coverLetter, String refreshToken) {
