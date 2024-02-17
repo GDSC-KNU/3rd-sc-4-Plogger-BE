@@ -34,7 +34,6 @@ public class Member extends BaseEntity {
     private String profileImage;
 
     @OneToMany(mappedBy = "member")
-    @JoinColumn(name = "plogging_id")
     List<Plogging> ploggings = new ArrayList<>();
 
     @Builder

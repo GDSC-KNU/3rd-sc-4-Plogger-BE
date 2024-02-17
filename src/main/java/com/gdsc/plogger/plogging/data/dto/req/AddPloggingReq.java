@@ -6,13 +6,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AddPloggingReq {
-    private Member member;
     private LocalDate date;
     private LocalDateTime period;
     private double distance;
     private int trashCount;
 
-    public Plogging toEntity() {
+    public Plogging toEntity(Member member) {
         return Plogging.builder()
                 .member(member)
                 .date(date)
