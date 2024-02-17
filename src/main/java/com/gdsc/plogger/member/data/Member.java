@@ -66,4 +66,12 @@ public class Member extends BaseEntity {
         // if profileImage == null, remove profileImage
         this.profileImage = profileImage;
     }
+
+    public void updateExp(int exp) {
+        final int maxExp = this.level * 50;
+        int totalExp = this.exp + exp;
+
+        this.level += totalExp / maxExp;
+        this.exp = totalExp - totalExp % maxExp;
+    }
 }

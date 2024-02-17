@@ -1,10 +1,12 @@
 package com.gdsc.plogger.plogging;
 
+import com.gdsc.plogger.ExpInfo;
 import com.gdsc.plogger.member.MemberRepository;
 import com.gdsc.plogger.member.data.Member;
 import com.gdsc.plogger.plogging.data.Plogging;
 import com.gdsc.plogger.plogging.data.dto.req.AddPloggingReq;
 import com.gdsc.plogger.plogging.data.dto.res.PloggingGetRes;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +41,8 @@ public class PloggingService {
     public ResponseEntity<PloggingGetRes> addPlogging(AddPloggingReq req) {
         Plogging newPlogging = ploggingRepository.save(req.toEntity(getMember()));
 
+        calculateExp(newPlogging);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(new PloggingGetRes(newPlogging));
     }
 
@@ -51,6 +55,14 @@ public class PloggingService {
         }
 
         ploggingRepository.delete(plogging);
+    }
+
+    @Transactional
+    public void calculateExp(Plogging plogging) {
+        Member member = getMember();
+        int exp = plogging.getTrashCount() * ExpInfo.TRASH.getExpInfo() + ExpInfo.PLOGGING.getExpInfo();
+
+        member.updateExp(exp);
     }
 
     private Member getMember() {
