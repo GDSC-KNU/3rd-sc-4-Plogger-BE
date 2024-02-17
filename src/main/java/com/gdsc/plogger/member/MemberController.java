@@ -2,9 +2,9 @@ package com.gdsc.plogger.member;
 
 import com.gdsc.plogger.member.data.dto.req.MemberPatchReq;
 import com.gdsc.plogger.member.data.dto.res.MemberGetRes;
+import com.gdsc.plogger.member.data.dto.res.MemberLevelInfoRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,5 +22,10 @@ public class MemberController {
     @PatchMapping
     public ResponseEntity<MemberGetRes> patchMember(@RequestBody MemberPatchReq patchReq) {
         return memberService.patchMember(patchReq);
+    }
+
+    @GetMapping("/level")
+    public ResponseEntity<MemberLevelInfoRes> getLevelInfo() {
+        return memberService.getLevelInfo();
     }
 }

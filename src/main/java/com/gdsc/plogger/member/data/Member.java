@@ -10,10 +10,13 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@DynamicInsert
 public class Member extends BaseEntity {
 
     @Id
@@ -32,6 +35,12 @@ public class Member extends BaseEntity {
     private String refreshToken;
 
     private String profileImage;
+
+    @ColumnDefault("1")
+    private int level;
+
+    @ColumnDefault("0")
+    private int exp;
 
     @OneToMany(mappedBy = "member")
     List<Plogging> ploggings = new ArrayList<>();

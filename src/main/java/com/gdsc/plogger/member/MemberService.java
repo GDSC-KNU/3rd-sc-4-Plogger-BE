@@ -3,10 +3,10 @@ package com.gdsc.plogger.member;
 import com.gdsc.plogger.member.data.Member;
 import com.gdsc.plogger.member.data.dto.req.MemberPatchReq;
 import com.gdsc.plogger.member.data.dto.res.MemberGetRes;
+import com.gdsc.plogger.member.data.dto.res.MemberLevelInfoRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +35,14 @@ public class MemberService {
         memberRepository.save(member);
 
         return new ResponseEntity<>(new MemberGetRes(member), HttpStatus.OK);
+    }
+
+    public ResponseEntity<MemberLevelInfoRes> getLevelInfo() {
+        Long id = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다."));
+
+        return ResponseEntity.ok().body(new MemberLevelInfoRes(member));
     }
 }
