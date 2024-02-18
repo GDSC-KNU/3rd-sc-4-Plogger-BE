@@ -1,6 +1,7 @@
 package com.gdsc.plogger.plogging;
 
 import com.gdsc.plogger.plogging.data.dto.req.AddPloggingReq;
+import com.gdsc.plogger.plogging.data.dto.res.AddPloggingRes;
 import com.gdsc.plogger.plogging.data.dto.res.PloggingGetRes;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class PloggingController {
     }
 
     @PostMapping
-    public ResponseEntity<PloggingGetRes> newPlogging(@RequestBody AddPloggingReq req) {
+    public ResponseEntity<AddPloggingRes> newPlogging(@RequestBody AddPloggingReq req) {
         return ploggingService.addPlogging(req);
     }
 

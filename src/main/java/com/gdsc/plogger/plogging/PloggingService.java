@@ -5,6 +5,7 @@ import com.gdsc.plogger.member.MemberRepository;
 import com.gdsc.plogger.member.data.Member;
 import com.gdsc.plogger.plogging.data.Plogging;
 import com.gdsc.plogger.plogging.data.dto.req.AddPloggingReq;
+import com.gdsc.plogger.plogging.data.dto.res.AddPloggingRes;
 import com.gdsc.plogger.plogging.data.dto.res.PloggingGetRes;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class PloggingService {
     }
 
     @Transactional
-    public ResponseEntity<PloggingGetRes> addPlogging(AddPloggingReq req) {
+    public ResponseEntity<AddPloggingRes> addPlogging(AddPloggingReq req) {
         Member member = getMember();
         Plogging newPlogging = ploggingRepository.save(req.toEntity(member));
 
@@ -47,7 +48,7 @@ public class PloggingService {
 
         member.updateExp(exp);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new PloggingGetRes(newPlogging));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AddPloggingRes(newPlogging));
     }
 
     public void deletePlogging(Long id) {
