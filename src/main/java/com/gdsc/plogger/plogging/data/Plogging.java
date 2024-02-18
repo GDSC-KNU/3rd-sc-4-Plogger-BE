@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,12 +27,12 @@ public class Plogging {
     private Member member;
 
     private LocalDate date;
-    private LocalDateTime period;
+    private LocalTime period;
     private double distance;
     private int trashCount;
 
     @Builder
-    public Plogging(Member member, LocalDate date, LocalDateTime period, double distance, int trashCount) {
+    public Plogging(Member member, LocalDate date, LocalTime period, double distance, int trashCount) {
         this.member = member;
         this.date = date;
         this.period = period;

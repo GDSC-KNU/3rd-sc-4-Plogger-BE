@@ -12,11 +12,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @DynamicInsert
+@DynamicUpdate
 public class Member extends BaseEntity {
 
     @Id
@@ -46,11 +48,12 @@ public class Member extends BaseEntity {
     List<Plogging> ploggings = new ArrayList<>();
 
     @Builder
-    public Member(String nickname, String email, String coverLetter, String refreshToken) {
+    public Member(String nickname, String email, String coverLetter, String refreshToken, int level) {
         this.nickname = nickname;
         this.email = email;
         this.coverLetter = coverLetter;
         this.refreshToken = refreshToken;
+        this.level = level;
     }
 
     public void update(MemberPatchReq req) {
@@ -68,7 +71,7 @@ public class Member extends BaseEntity {
     }
 
     public void updateExp(int exp) {
-        final int maxExp = this.level * 50;
+        int maxExp = this.level * 50;
         int totalExp = this.exp + exp;
 
         this.level += totalExp / maxExp;

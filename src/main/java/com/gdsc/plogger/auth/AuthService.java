@@ -63,6 +63,7 @@ public class AuthService {
                 .nickname(req.getNickname())
                 .email(req.getEmail())
                 .coverLetter(req.getCoverLetter())
+                .level(1)
                 .build();
 
         memberRepository.save(member);
