@@ -64,6 +64,7 @@ public class AuthService {
                 .email(req.getEmail())
                 .coverLetter(req.getCoverLetter())
                 .level(1)
+                .exp(0)
                 .build();
 
         memberRepository.save(member);

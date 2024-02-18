@@ -17,8 +17,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Getter
 @NoArgsConstructor
-@DynamicInsert
-@DynamicUpdate
 public class Member extends BaseEntity {
 
     @Id
@@ -38,22 +36,21 @@ public class Member extends BaseEntity {
 
     private String profileImage;
 
-    @ColumnDefault("1")
     private int level;
 
-    @ColumnDefault("0")
     private int exp;
 
     @OneToMany(mappedBy = "member")
     List<Plogging> ploggings = new ArrayList<>();
 
     @Builder
-    public Member(String nickname, String email, String coverLetter, String refreshToken, int level) {
+    public Member(String nickname, String email, String coverLetter, String refreshToken, int level, int exp) {
         this.nickname = nickname;
         this.email = email;
         this.coverLetter = coverLetter;
         this.refreshToken = refreshToken;
         this.level = level;
+        this.exp = exp;
     }
 
     public void update(MemberPatchReq req) {
@@ -75,6 +72,6 @@ public class Member extends BaseEntity {
         int totalExp = this.exp + exp;
 
         this.level += totalExp / maxExp;
-        this.exp = totalExp - totalExp % maxExp;
+        this.exp = totalExp % maxExp;
     }
 }

@@ -38,10 +38,14 @@ public class PloggingService {
                 .body(res);
     }
 
+    @Transactional
     public ResponseEntity<PloggingGetRes> addPlogging(AddPloggingReq req) {
-        Plogging newPlogging = ploggingRepository.save(req.toEntity(getMember()));
+        Member member = getMember();
+        Plogging newPlogging = ploggingRepository.save(req.toEntity(member));
 
-        calculateExp(newPlogging);
+        int exp = newPlogging.getTrashCount() * ExpInfo.TRASH.getExpInfo() + ExpInfo.PLOGGING.getExpInfo();
+
+        member.updateExp(exp);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new PloggingGetRes(newPlogging));
     }
@@ -55,14 +59,6 @@ public class PloggingService {
         }
 
         ploggingRepository.delete(plogging);
-    }
-
-    @Transactional
-    public void calculateExp(Plogging plogging) {
-        Member member = getMember();
-        int exp = plogging.getTrashCount() * ExpInfo.TRASH.getExpInfo() + ExpInfo.PLOGGING.getExpInfo();
-
-        member.updateExp(exp);
     }
 
     private Member getMember() {
