@@ -36,6 +36,8 @@ public class OAuthController {
                         .exp(0)
                         .build();
 
+            member.updateProfileImage(user.getPhoto());
+
             memberRepository.save(member);
         }
 

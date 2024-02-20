@@ -14,6 +14,10 @@ public class GoogleUser {
     }
 
     public String getName() {
-        return (String) attribute.get("fullName");
+        return (String) attribute.get("displayName");
+    }
+
+    public String getPhoto() {
+        return (String) attribute.get("photoUrl");
     }
 }
